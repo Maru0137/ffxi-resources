@@ -1,0 +1,3 @@
+[submodule "thirdparty/resources"]
+	path = thirdparty/resources
+	url = https://github.com/Windower/Resources.git
