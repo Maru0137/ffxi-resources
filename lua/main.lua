@@ -8,4 +8,4 @@ local item_descs = require(resources.."item_descriptions")
 local gears = require("gears")
 local util = require("util")
 
-util.printTable(gears.toReadables(gears.rows()))
+util.printTable(gears.rows(items, item_descs).toReadables())
