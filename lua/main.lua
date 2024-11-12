@@ -9,6 +9,7 @@ local gears = require("gears")
 local util = require("util")
 
 row = gears.rows(items, item_descs)
-util.printTable(row:toReadables())
+
+row:exportToJson()
 
 -- util.printTable(gears.rows(items, item_descs).toReadables())

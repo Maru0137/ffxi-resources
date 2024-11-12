@@ -19,8 +19,8 @@ JobBitSet.toString = function(self)
   end
 
   local str = ''
-  for k, v in pairs(Jobs) do
-    if self.bitset & (1 << (v)) ~= 0 then
+  for k, _ in pairs(Jobs) do
+    if self.bitset & (1 << (k)) ~= 0 then
       str = str .. Job.new(k):toInitial()
     end
   end

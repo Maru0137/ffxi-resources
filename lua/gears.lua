@@ -1,4 +1,6 @@
-package.path=package.path..';./lua/?.lua'
+package.path=package.path..';./lua/?.lua;$HOME/.luarocs'
+
+local cjson = require("cjson")
 
 require("instance")
 require("job_bitset")
@@ -166,6 +168,11 @@ Gears.toReadables = function(self)
   end
   
   return readableGears
+end;
+
+Gears.exportToJson = function(self)
+  text = cjson.encode(self:toReadables())
+  print(text)
 end;
 
 local function rows(items, descs)
