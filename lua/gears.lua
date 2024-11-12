@@ -1,108 +1,8 @@
 package.path=package.path..';./lua/?.lua'
 
-local util = require("util")
-
-local function instance(class, super, ...)
-  local self = (super and super.new(...) or {})
-  setmetatable(self, {__index = class})
-  setmetatable(class, {__index = super})
-  return self
-end
-
-
-local Enum = {}
-Enum.new = function(id)
-  local self = instance(Enum)
-  self.id = id
-
-  return self
-end;
-
-Enum.toString = function(self)
-  return strs[self.id]
-end;
-
-
-local JobBitSet = {}
-JobBitSet.new = function(bitset)
-  local self = instance(JobBitSet)
-  self.bitset = bitset
-
-  return self
-end;
-
-JobBitSet.toString = function(self)
-  local strs = {
-    [1] = '戦',
-    [2] = 'モ',
-    [3] = '白',
-    [4] = '黒',
-    [5] = '赤',
-    [6] = 'シ',
-    [7] = 'ナ',
-    [8] = '暗',
-    [9] = '獣',
-    [10] = '詩',
-    [11] = '狩',
-    [12] = '侍',
-    [13] = '忍',
-    [14] = '竜',
-    [15] = '召',
-    [16] = '青',
-    [17] = 'コ',
-    [18] = 'か',
-    [19] = '踊',
-    [20] = '学',
-    [21] = '風',
-    [22] = '剣',
-  }  
-  
-  local alljob_bitset = (1 << (#strs + 1)) - 2
-  if self.bitset == alljob_bitset then
-    return 'All Jobs'
-  end
-  
-  local str = ''
-  for i, v in ipairs(strs) do
-    if self.bitset & (1 << (i)) ~= 0 then
-      str = str .. v
-    end
-  end
-  
-  return str
-end;
-
-
-Skill = {}
-
-Skill.new = function(id)
-  local self = instance(Skill)
-  self.id = id
-  return self
-end; 
-
-Skill.toString = function(self)
-  local strs = {
-    [1] = '格闘',
-    [2] = '短剣',
-    [3] = '片手剣',
-    [4] = '両手剣',
-    [5] = '片手斧',
-    [6] = '両手斧',
-    [7] = '両手鎌',
-    [8] = '両手槍',
-    [9] = '片手刀',
-    [10] = '両手刀',
-    [11] = '片手棍',
-    [12] = '両手棍',
-    [25] = '弓術',
-    [26] = '射撃',
-    [27] = '投てき'
-  }
-
-  return strs[self.id]
-end;
-
+require("instance")
+require("job_bitset")
+require("skill")
 
 local SlotBitSet = {}
 
@@ -267,8 +167,6 @@ Gears.toReadables = function(self)
   
   return readableGears
 end;
-
-
 
 local function rows(items, descs)
   return Gears.convertFromWindower(items, descs)
